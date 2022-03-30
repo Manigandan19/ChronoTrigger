@@ -1,0 +1,7 @@
+config:
+  ChronoTrigger:location: westus
+  ChronoTrigger:objectId: b8f1851e-0a61-45b7-8dcb-7d812dbf99ab
+  ChronoTrigger:tenandId: 415af657-03d2-4a1c-8c2e-ac154dceb8fb
+  azure-native:location: westus
+  azure-native:objectId: b8f1851e-0a61-45b7-8dcb-7d812dbf99ab
+  azure-native:tenandId: 415af657-03d2-4a1c-8c2e-ac154dceb8fb

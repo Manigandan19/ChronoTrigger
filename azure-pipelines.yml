@@ -1,12 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  function_app_name: 'AuthorizationChronoTrigger'
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0 
+
+# Install dependencies
+- script: npm install
+  workingDirectory: $(System.DefaultWorkingDirectory)
+  displayName: "Install linting, test and coverage dependencies"
+
+ # Execute unit tests
+- script: npm run test-ci
+  workingDirectory: $(System.DefaultWorkingDirectory)/$(function_app_name)
+  displayName: "Execute unit tests"
+
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
 - script: |
-    chmod +x scripts/*.sh
-    ./scripts/setup.sh
-    ./scripts/run-pulumi.sh      
-  displayName: 'Install pulumi and run infra code'
-    name: pulumi
-    env:
-      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
-      ARM_CLIENT_SECRET: $(arm.client.secret)
-      ARM_SUBSCRIPTION_ID: $(arm.subscription.id)
-      ARM_CLIENT_ID: $(arm.client.id)
-      ARM_TENANT_ID: $(arm.tenant.id)
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'

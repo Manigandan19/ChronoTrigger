@@ -17,8 +17,7 @@ steps:
 
 # Install dependencies
 - script: npm install
-  workingDirectory: /
-  displayName: "Install linting, test and coverage dependencies"
+  displayName: "Install test and coverage dependencies"
 
  # Execute unit tests
 - script: npm run test-ci

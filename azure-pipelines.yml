@@ -23,6 +23,7 @@ steps:
 - script: npm run test-ci
   workingDirectory: /
   displayName: "Execute unit tests"
+  continueOnError: true
 
 - script: echo Hello, world!
   displayName: 'Run a one-line script'

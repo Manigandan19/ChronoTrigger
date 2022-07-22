@@ -17,12 +17,12 @@ steps:
 
 # Install dependencies
 - script: npm install
-  workingDirectory: $(System.DefaultWorkingDirectory)
+  workingDirectory: /
   displayName: "Install linting, test and coverage dependencies"
 
  # Execute unit tests
 - script: npm run test-ci
-  workingDirectory: $(System.DefaultWorkingDirectory)/$(function_app_name)
+  workingDirectory: /
   displayName: "Execute unit tests"
 
 - script: echo Hello, world!

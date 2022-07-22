@@ -1,11 +1,8 @@
-...
-...
-  # Some lines omitted for brevity.
-  - script: |
-      chmod +x scripts/*.sh
-      ./scripts/setup.sh
-      ./scripts/run-pulumi.sh      
-    displayName: 'Install pulumi and run infra code'
+- script: |
+    chmod +x scripts/*.sh
+    ./scripts/setup.sh
+    ./scripts/run-pulumi.sh      
+  displayName: 'Install pulumi and run infra code'
     name: pulumi
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
@@ -13,5 +10,3 @@
       ARM_SUBSCRIPTION_ID: $(arm.subscription.id)
       ARM_CLIENT_ID: $(arm.client.id)
       ARM_TENANT_ID: $(arm.tenant.id)
-...
-...

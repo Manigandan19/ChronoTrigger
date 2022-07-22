@@ -1,0 +1,8 @@
+{
+  "**/*.+(js|ts|md|test**/*)": [
+    "prettier --write"
+  ],
+  "**/*.+(ts|test**/*)": [
+    "jest"
+  ]
+}

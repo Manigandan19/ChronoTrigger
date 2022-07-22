@@ -1,10 +1,33 @@
 {
-    "name": "ChronoTrigger",
-    "devDependencies": {
-        "@types/node": "^14"
+    "name": "chrono-trigger",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "prestart": "npm run build",
+        "start": "func start",
+        "test": "jest --coverage",
+        "lint-staged": "lint-staged",
+        "prepare": "husky install"
+      },
+    "devDependencies": {      
+        "@types/jest": "^27.4.1",
+        "@typescript-eslint/eslint-plugin": "^5.17.0",
+        "@types/node": "^14",
+        "eslint": "^8.12.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^16.1.4",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^7.0.4",
+        "jest": "^27.5.1",
+        "lint-staged": "^12.3.7",
+        "prettier": "^2.6.1",
+        "ts-jest": "^27.1.4",
+        "typescript": "^4.6.3"
     },
-    "dependencies": {
+    "dependencies": {   
         "@pulumi/azure-native": "^1.0.0",
-        "@pulumi/pulumi": "^3.0.0"
+        "@pulumi/pulumi": "^3.0.0"    
     }
 }

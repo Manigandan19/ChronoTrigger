@@ -3,32 +3,14 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-variables:
-  function_app_name: 'AuthorizationChronoTrigger'
-
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- task: NodeTool@0 
-
-# Install dependencies
-- script: npm install
-  displayName: "Install test and coverage dependencies"
-
- # Execute unit tests
-- script: npm run test-ci
-  workingDirectory: /
-  displayName: "Execute unit tests"
-  continueOnError: true
-
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+- job: infrastructure
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - task: Npm@1
+    inputs:
+      command: install

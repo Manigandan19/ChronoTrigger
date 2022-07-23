@@ -14,7 +14,9 @@ jobs:
   - task: Npm@1
     inputs:
       command: install
-  - task: VSTest@2
+  - task: PublishTestResults@2
     inputs:
-      searchFolder: '$(System.DefaultWorkingDirectory)' 
+      testRunner: VSTest 
+      failTaskOnFailedTests: true
+      searchFolder: '$(System.DefaultWorkingDirectory)'
        

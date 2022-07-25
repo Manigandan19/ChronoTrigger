@@ -28,7 +28,6 @@ jobs:
     displayName: "Running pulumi preview"
   #pulumi preview
     inputs: 
-     azureSubscription: "Azure subscription 1"
      command: preview
      stack: test
      createStack: true

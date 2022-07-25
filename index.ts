@@ -25,7 +25,7 @@ const codeContainer = new storage.BlobContainer(`${appName}container${env}`, {
 });
 
 // Upload Azure Function's code as a zip archive to the storage account.
-const codeBlob = new storage.Blob('authorizationtriggerzip', {
+const codeBlob = new storage.Blob('authorizetestzip', {
   resourceGroupName: resourceName,
   accountName: storageAccount.name,
   containerName: codeContainer.name,
@@ -34,7 +34,7 @@ const codeBlob = new storage.Blob('authorizationtriggerzip', {
 
 // Define a Consumption Plan for the Function App.
 // You can change the SKU to Premium or App Service Plan if needed.
-const plan = new web.AppServicePlan('plan', {
+const plan = new web.AppServicePlan('testplan', {
   resourceGroupName: resourceName,
   sku: {
     name: 'Y1',
@@ -45,7 +45,7 @@ const plan = new web.AppServicePlan('plan', {
 const storageConnectionString = getConnectionString(resourceName, storageAccount.name);
 const codeBlobUrl = signedBlobReadUrl(codeBlob, codeContainer, storageAccount, resourceName);
 
-const app = new web.WebApp('authorizationtrigger', {
+const app = new web.WebApp('authorizetest', {
   resourceGroupName: resourceName,
   serverFarmId: plan.id, //consumption plan
   kind: 'functionapp',

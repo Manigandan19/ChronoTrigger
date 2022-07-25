@@ -29,3 +29,4 @@ jobs:
     inputs:
       stack: "test"
   - script: npm run pulumi-preview:dev
+    workingDirectory: $(System.DefaultWorkingDirectory)

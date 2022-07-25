@@ -15,4 +15,8 @@ jobs:
     # Install dependencies
   - script: npm install
     displayName: "Install linting, test and coverage dependencies"
+
+    # Execute unit tests
+  - script: npm run test-ci
+    displayName: "Execute unit tests"
        

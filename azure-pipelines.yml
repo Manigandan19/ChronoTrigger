@@ -11,12 +11,8 @@ jobs:
   pool:
     vmImage: ubuntu-latest
   steps:
-  - task: Npm@1
-    inputs:
-      command: install
-  - task: PublishTestResults@2
-    inputs:
-      testRunner: VSTest 
-      failTaskOnFailedTests: true
-      searchFolder: '$(System.DefaultWorkingDirectory)'
+  - task: NodeTool@0 
+    # Install dependencies
+  - script: npm install
+    displayName: "Install linting, test and coverage dependencies"
        

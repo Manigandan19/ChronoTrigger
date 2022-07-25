@@ -28,4 +28,4 @@ jobs:
     displayName: "Running pulumi preview"
     inputs:
       stack: "test"
-  - script: npm run pulumi preview:dev
+  - script: npm run pulumi-preview:dev

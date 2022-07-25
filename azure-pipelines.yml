@@ -24,12 +24,10 @@ jobs:
   - script: npm run test
     displayName: "Execute unit tests"
     continueOnError: true
-  - task: Pulumi@1
-    displayName: "Running pulumi preview"
-    inputs:
-      stack: "test"
-      createStack: true
-  - script: npm run pulumi-preview:dev
+    
+    # Pulumi preview
+  - script: pulumi stack select test
     workingDirectory: $(System.DefaultWorkingDirectory)
+  - script: npm run pulumi-preview:dev
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)

@@ -30,6 +30,8 @@ jobs:
     workingDirectory: $(System.DefaultWorkingDirectory)
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      azureSubscription: 'testazureconnection'
   - script: npm run pulumi-preview:dev
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      azureSubscription: 'testazureconnection'

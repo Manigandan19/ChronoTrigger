@@ -28,7 +28,7 @@ jobs:
   - task: AzureCLI@2
     displayName: Azure CLI
     inputs:
-     azureSubscription: "testazureconnection"
+     azureSubscription: 'testazureconnection'
      scriptType: ps
      scriptLocation: inlineScript
      inlineScript: |

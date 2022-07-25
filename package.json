@@ -2,13 +2,16 @@
     "name": "chrono-trigger",
     "version": "1.0.0",
     "scripts": {
+        "build:authorize": "cd authorizationchronotrigger && npm run build",
         "build": "tsc",
         "watch": "tsc -w",
         "prestart": "npm run build",
         "start": "func start",
         "test": "jest --coverage",
         "lint-staged": "lint-staged",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "pulumi-preview:dev": "npm run build && cross-env NODE_ENV=dev pulumi preview",
+        "pulumi:dev": "npm run build && cross-env NODE_ENV=dev pulumi up"
       },
     "devDependencies": {      
         "@types/jest": "^27.4.1",

@@ -28,7 +28,11 @@ jobs:
     displayName: "Running pulumi preview"
   #pulumi preview
     inputs: 
+     azureSubscription: "Azure subscription 1"
      command: preview
      stack: test
      createStack: true
+    env:
+     AZURE_CLIENT_ID: 90cf9853-d330-4bcf-8e87-269fb69e9672
+     AZURE_TENANT_ID: 415af657-03d2-4a1c-8c2e-ac154dceb8fb
        

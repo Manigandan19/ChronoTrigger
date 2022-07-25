@@ -28,6 +28,7 @@ jobs:
     displayName: "Running pulumi preview"
     inputs:
       stack: "test"
+      createStack: true
   - script: npm run pulumi-preview:dev
     workingDirectory: $(System.DefaultWorkingDirectory)
     env:

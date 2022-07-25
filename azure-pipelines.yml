@@ -23,4 +23,11 @@ jobs:
     # Execute unit tests
   - script: npm run test
     displayName: "Execute unit tests"
+    continueOnError: true
+  - task: Pulumi@1
+    displayName: "Running pulumi preview"
+  #pulumi preview
+    inputs: 
+     command: preview
+     stack: test
        

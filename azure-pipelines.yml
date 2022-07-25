@@ -28,6 +28,8 @@ jobs:
     # Pulumi preview
   - script: pulumi stack select test
     workingDirectory: $(System.DefaultWorkingDirectory)
+    env:
+      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
   - script: npm run pulumi-preview:dev
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)

@@ -25,13 +25,21 @@ jobs:
     displayName: "Execute unit tests"
     continueOnError: true
     
+  - task: AzureCLI@2
+    displayName: Azure CLI
+    inputs:
+     azureSubscription: "testazureconnection"
+     scriptType: ps
+     scriptLocation: inlineScript
+     inlineScript: |
+      az --version
+      az account show
+
     # Pulumi preview
   - script: pulumi stack select test
     workingDirectory: $(System.DefaultWorkingDirectory)
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
-      azureSubscription: 'testazureconnection'
   - script: npm run pulumi-preview:dev
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
-      azureSubscription: 'testazureconnection'

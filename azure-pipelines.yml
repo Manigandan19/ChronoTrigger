@@ -20,10 +20,6 @@ jobs:
     workingDirectory: $(System.DefaultWorkingDirectory)/AuthorizationChronoTrigger
     displayName: "Install Authorization packages"
 
-    - script: npm install
-    workingDirectory: $(System.DefaultWorkingDirectory)/DocumentUploadChronoTrigger
-    displayName: "Install DocumentUpload packages"
-
     # Execute unit tests
   - script: npm run test
     displayName: "Execute unit tests"

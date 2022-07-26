@@ -6,7 +6,7 @@ import * as web from '@pulumi/azure-native/web';
 // This is the resource group name, we don't have access to create new resource group so we hard coded it..
 let resourceName = 'Krossark_RG';
 const env = 'test';
-const appName = 'drcicd';
+const appName = 'cd';
 
 // Storage account is required by Function App.
 // Also, we will upload the function code to the same storage account.

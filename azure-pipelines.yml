@@ -24,16 +24,6 @@ jobs:
   - script: npm run test
     displayName: "Execute unit tests"
     continueOnError: true
-    
-  - task: AzureCLI@2
-    displayName: Azure CLI
-    inputs:
-     azureSubscription: 'testazureconnection'
-     scriptType: ps
-     scriptLocation: inlineScript
-     inlineScript: |
-      az --version
-      az account show
 
     # Pulumi preview
   - script: pulumi stack select test
@@ -43,3 +33,6 @@ jobs:
   - script: npm run pulumi-preview:dev
     env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      ARM_SUBSCRIPTION_ID: $(arm.subscription.id)
+      ARM_CLIENT_ID: $(arm.client.id)
+      ARM_TENANT_ID: $(arm.tenant.id)

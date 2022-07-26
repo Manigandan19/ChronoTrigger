@@ -32,6 +32,13 @@ const codeBlob = new storage.Blob('authorizetestzip', {
   source: new pulumi.asset.FileArchive('./AuthorizationChronoTrigger'),
 });
 
+const codeBlobDoc = new storage.Blob('documenttestzip', {
+  resourceGroupName: resourceName,
+  accountName: storageAccount.name,
+  containerName: codeContainer.name,
+  source: new pulumi.asset.FileArchive('./DocumentUploadChronoTrigger'),
+});
+
 // Define a Consumption Plan for the Function App.
 // You can change the SKU to Premium or App Service Plan if needed.
 const plan = new web.AppServicePlan('testplan', {
@@ -44,6 +51,8 @@ const plan = new web.AppServicePlan('testplan', {
 
 const storageConnectionString = getConnectionString(resourceName, storageAccount.name);
 const codeBlobUrl = signedBlobReadUrl(codeBlob, codeContainer, storageAccount, resourceName);
+
+const codeBlobDocUrl = signedBlobReadUrl(codeBlobDoc, codeContainer, storageAccount, resourceName);
 
 const app = new web.WebApp('authorizetest', {
   resourceGroupName: resourceName,
@@ -62,4 +71,19 @@ const app = new web.WebApp('authorizetest', {
   },
 });
 
-
+const appDoc = new web.WebApp('documenttest', {
+  resourceGroupName: resourceName,
+  serverFarmId: plan.id, //consumption plan
+  kind: 'functionapp',
+  siteConfig: {
+    appSettings: [
+      { name: 'AzureWebJobsStorage', value: storageConnectionString },
+      { name: 'FUNCTIONS_EXTENSION_VERSION', value: '~4' },
+      { name: 'FUNCTIONS_WORKER_RUNTIME', value: 'node' },
+      { name: 'WEBSITE_NODE_DEFAULT_VERSION', value: '~16' },
+      { name: 'WEBSITE_RUN_FROM_PACKAGE', value: codeBlobDocUrl },
+    ],
+    http20Enabled: true,
+    nodeVersion: '~16',
+  },
+});

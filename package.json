@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "build:authorize": "cd authorizationchronotrigger && npm run build",
+        "build:documentupload": "cd documentuploadchronotrigger && npm run build",
         "build": "tsc",
         "watch": "tsc -w",
         "prestart": "npm run build",

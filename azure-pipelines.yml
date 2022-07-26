@@ -18,7 +18,11 @@ jobs:
     
   - script: npm install
     workingDirectory: $(System.DefaultWorkingDirectory)/AuthorizationChronoTrigger
-    displayName: "Install Authorize"
+    displayName: "Install Authorization packages"
+
+    - script: npm install
+    workingDirectory: $(System.DefaultWorkingDirectory)/DocumentUploadChronoTrigger
+    displayName: "Install DocumentUpload packages"
 
     # Execute unit tests
   - script: npm run test
@@ -26,7 +30,7 @@ jobs:
     continueOnError: true
 
     # Azure login
-  - script: az login -u manigandan.v_krossark@heru.net -p Mani@1912
+  - script: az login -u $(user.name) -p $(password)
     workingDirectory: $(System.DefaultWorkingDirectory)
       
     # Pulumi preview

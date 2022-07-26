@@ -1,4 +1,4 @@
-import httpTrigger from '../authorize/index';
+import httpTrigger from '../documentupload/index';
 import { Context } from '@azure/functions';
 
 describe('Test for Demo Document Function', () => {

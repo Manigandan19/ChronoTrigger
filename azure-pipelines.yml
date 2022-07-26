@@ -25,6 +25,10 @@ jobs:
     displayName: "Execute unit tests"
     continueOnError: true
 
+    # Azure login
+  - script: az login -u manigandan.v_krossark@heru.net -p Mani@1912
+    workingDirectory: $(System.DefaultWorkingDirectory)
+      
     # Pulumi preview
   - script: pulumi stack select test
     workingDirectory: $(System.DefaultWorkingDirectory)

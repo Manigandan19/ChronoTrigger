@@ -1,7 +1,7 @@
 import httpTrigger from '../authorize/index';
 import { Context } from '@azure/functions';
 
-describe('Test for Demo Function', () => {
+describe('Test for Demo Document Function', () => {
   let context: Context;
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('Test for Demo Function', () => {
       body: { name: 'John' },
     };
     const resultString =
-      'Hello, John. This HTTP triggered function executed successfully.';
+      'Hello, John. This HTTP document triggered function executed successfully.';
 
     // Action
     await httpTrigger(context, request);

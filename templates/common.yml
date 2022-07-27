@@ -27,7 +27,7 @@ stages:
           - task: Npm@1 
            # Install dependencies
           - script: npm install
-              displayName: "Install linting, test and coverage dependencies"
+            displayName: "Install linting, test and coverage dependencies"
             
           - script: npm install
             workingDirectory: ${{parameters.authorizationfilePath}}

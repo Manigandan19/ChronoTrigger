@@ -21,7 +21,9 @@ stages:
         displayName: Deploy to ${{parameters.environment}}
         pool:
           vmImage: ubuntu-latest
-      - job: Deploy-pulumi
+        environment:
+          name: ${{parameters.environment}}
+      - job: PulumiDeploy
         steps:
         - script: pulumi stack select ${{parameters.environment}}
           workingDirectory: $(System.DefaultWorkingDirectory)

@@ -1,0 +1,32 @@
+parameters:
+  - name: environment
+    type: string
+  - name: dependsOn
+    type: object
+    default: ['deploy_to_test']
+  - name: condition
+    type: string
+    default: 'succeeded()'
+stages:
+  - stage: deploy_to_${{parameters.environment}}
+    displayName: Deploy to ${{parameters.environment}}
+    dependsOn:
+      - Build
+      - ${{ parameters.dependsOn }}
+    condition: ${{ parameters.condition }}
+    jobs:
+      - deployment: Deploy
+        variables:
+          chrono.tag: $[stageDependencies.Build.Build.outputs['GetPackageVersion.chrono.tag']]
+        displayName: Deploy to ${{parameters.environment}}
+        pool:
+          vmImage: ubuntu-latest
+      - job: Deploy-pulumi
+        steps:
+        - script: pulumi stack select ${{parameters.environment}}
+          workingDirectory: $(System.DefaultWorkingDirectory)
+          env:
+           PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+        - script: npm run pulumi-preview:${{parameters.environment}}
+          env:
+            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)

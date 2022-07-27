@@ -1,43 +1,8 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  - main
 
-jobs:
-- job: infrastructure
-  pool:
-    vmImage: ubuntu-latest
-  steps:
-  - task: Npm@1 
-    # Install dependencies
-  - script: npm install
-    displayName: "Install linting, test and coverage dependencies"
-    
-  - script: npm install
-    workingDirectory: $(System.DefaultWorkingDirectory)/AuthorizationChronoTrigger
-    displayName: "Install Authorization packages"
+pool:
+  vmImage: ubuntu-latest
 
-  - script: npm install
-    workingDirectory: $(System.DefaultWorkingDirectory)/DocumentUploadChronoTrigger
-    displayName: "Install DocumentUpload packages"
-
-    # Execute unit tests
-  - script: npm run test
-    displayName: "Execute unit tests"
-    continueOnError: true
-
-    # Azure login
-  - script: az login -u $(user.name) -p $(password)
-    workingDirectory: $(System.DefaultWorkingDirectory)
-      
-    # Pulumi preview
-  - script: pulumi stack select test
-    workingDirectory: $(System.DefaultWorkingDirectory)
-    env:
-      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
-  - script: npm run pulumi-preview:dev
-    env:
-      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+stages:
+  - template: templates/common.yml

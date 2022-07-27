@@ -1,0 +1,83 @@
+parameters:
+  - name: authorizationfilePath
+    type: string
+    default: '$(System.DefaultWorkingDirectory)/AuthorizationChronoTrigger'
+  - name: documentationfilePath
+    type: string
+    default: '$(System.DefaultWorkingDirectory)/DocumentUploadChronoTrigger'
+
+stages:
+  - stage: Build
+    displayName: Build and push
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - bash: |
+              if [[ -n $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER ]]; then
+                  echo "This commit is part of PR ${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER}"
+                  tag="pr-${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER}"
+              else
+                  tag=$(node -p "require('./package.json').version")
+                  echo "Got package version ${tag}"
+              fi
+              echo "##vso[task.setvariable variable=chrono.tag;isOutput=true]${tag}"
+            displayName: Get the version from package.json
+            name: GetPackageVersion
+          - task: Npm@1 
+           # Install dependencies
+          - script: npm install
+              displayName: "Install linting, test and coverage dependencies"
+            
+          - script: npm install
+            workingDirectory: ${{parameters.authorizationfilePath}}
+            displayName: "Install Authorization packages"
+
+          - script: npm install
+            workingDirectory: ${{parameters.documentationfilePath}}
+            displayName: "Install DocumentUpload packages"
+
+           # Azure login
+          - script: az login -u $(user.name) -p $(password)
+            workingDirectory: $(System.DefaultWorkingDirectory)
+
+           # Execute unit tests
+          - script: npm run test
+            displayName: "Execute unit tests"
+            continueOnError: true 
+  # This section does the actual deployments.  It will only fire if the build was triggered manually, or
+  # if the build was triggered by an accepted PR (aka a commit to the main branch).
+  - ${{ if or(eq(variables['Build.Reason'], 'IndividualCI'), eq(variables['Build.Reason'], 'Manual')) }}:
+    - template: deploy.yml
+      parameters:
+        environment: test
+        dependsOn: []
+    - template: deploy.yml
+      parameters:
+        environment: dev
+        dependsOn: deploy_to_test
+    - template: deploy.yml
+      parameters:
+        environment: sales
+        dependsOn: deploy_to_dev
+    - template: deploy.yml
+      parameters:
+        environment: prod
+        dependsOn: deploy_to_sales
+    - stage: UpdateRelease
+      displayName: Update the release to be final in GitHub
+      dependsOn: deploy_to_prod
+      jobs:
+        - job: UpdateRelease
+          steps:
+            - bash: |
+                tag=$(node -p "require('./package.json').version")
+                echo "##vso[task.setvariable variable=chrono.tag;isOutput=true]${tag}"
+              displayName: Get the version from package.json
+              name: GetPackageVersion
+            - task: GitHubRelease@1
+              inputs:
+                gitHubConnection: github connection 1
+                action: edit
+                tag: '$(GetPackageVersion.chrono.tag)'
+                isPreRelease: false

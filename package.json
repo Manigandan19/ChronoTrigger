@@ -11,7 +11,10 @@
         "test": "jest --coverage",
         "lint-staged": "lint-staged",
         "prepare": "husky install",
+        "pulumi-preview:test": "npm run build && cross-env NODE_ENV=test pulumi preview",
         "pulumi-preview:dev": "npm run build && cross-env NODE_ENV=dev pulumi preview",
+        "pulumi-preview:sales": "npm run build && cross-env NODE_ENV=sales pulumi preview",
+        "pulumi-preview:prod": "npm run build && cross-env NODE_ENV=prod pulumi preview",
         "pulumi:dev": "npm run build && cross-env NODE_ENV=dev pulumi up"
       },
     "devDependencies": {      

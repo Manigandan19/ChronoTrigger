@@ -35,10 +35,6 @@ stages:
             workingDirectory: ${{parameters.documentationfilePath}}
             displayName: "Install DocumentUpload packages"
 
-           # Azure login
-          - script: az login -u $(user.name) -p $(password)
-            workingDirectory: $(System.DefaultWorkingDirectory)
-
            # Execute unit tests
           - script: npm run test
             displayName: "Execute unit tests"
@@ -53,6 +49,8 @@ stages:
     - template: deploy.yml
       parameters:
         environment: dev
+        userName: $(user.name)
+        password: $(password)
         dependsOn: deploy_to_test
     - template: deploy.yml
       parameters:

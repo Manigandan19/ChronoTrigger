@@ -1,6 +1,10 @@
 parameters:
   - name: environment
     type: string
+  - name: userName
+    type: string
+  - name: password
+    type: string
   - name: dependsOn
     type: object
     default: ['deploy_to_test']
@@ -24,6 +28,11 @@ stages:
         - script: npm install
           workingDirectory: $(System.DefaultWorkingDirectory)
           displayName: "Install linting, test and coverage dependencies"
+
+           # Azure login
+        - script: az login -u ${{parameters.userName}} -p ${{parameters.password}}
+          workingDirectory: $(System.DefaultWorkingDirectory)
+
            # Deploy Pulumi 
         - script: pulumi stack select ${{parameters.environment}}
           workingDirectory: $(System.DefaultWorkingDirectory)

@@ -15,15 +15,9 @@ stages:
       - ${{ parameters.dependsOn }}
     condition: ${{ parameters.condition }}
     jobs:
-      - deployment: Deploy
-        variables:
-          chrono.tag: $[stageDependencies.Build.Build.outputs['GetPackageVersion.chrono.tag']]
-        displayName: Deploy to ${{parameters.environment}}
+      - job: PulumiDeploy
         pool:
           vmImage: ubuntu-latest
-        environment:
-          name: ${{parameters.environment}}
-      - job: PulumiDeploy
         steps:
         - script: pulumi stack select ${{parameters.environment}}
           workingDirectory: $(System.DefaultWorkingDirectory)

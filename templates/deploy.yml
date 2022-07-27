@@ -24,5 +24,6 @@ stages:
           env:
            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
         - script: npm run pulumi-preview:${{parameters.environment}}
+          workingDirectory: $(System.DefaultWorkingDirectory)
           env:
             PULUMI_ACCESS_TOKEN: $(pulumi.access.token)

@@ -19,6 +19,12 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
+        - task: Npm@1 
+           # Install dependencies
+        - script: npm install
+          workingDirectory: $(System.DefaultWorkingDirectory)
+          displayName: "Install linting, test and coverage dependencies"
+           # Deploy Pulumi 
         - script: pulumi stack select ${{parameters.environment}}
           workingDirectory: $(System.DefaultWorkingDirectory)
           env:

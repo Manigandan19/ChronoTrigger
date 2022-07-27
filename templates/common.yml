@@ -26,9 +26,6 @@ stages:
             name: GetPackageVersion
           - task: Npm@1 
            # Install dependencies
-          - script: npm install
-            workingDirectory: $(System.DefaultWorkingDirectory)
-            displayName: "Install linting, test and coverage dependencies"
             
           - script: npm install
             workingDirectory: ${{parameters.authorizationfilePath}}

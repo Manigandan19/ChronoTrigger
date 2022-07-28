@@ -13,6 +13,8 @@ parameters:
 variables:
   - group: ${{parameters.environment}} variable configuration
   - name: userName
+    value: $[variables.userName]
+
 stages:
   - stage: deploy_to_${{parameters.environment}}
     displayName: Deploy to ${{parameters.environment}}

@@ -92,7 +92,6 @@
 /* eslint-disable no-new */
 import * as pulumi from '@pulumi/pulumi';
 import * as storage from '@pulumi/azure-native/storage';
-import * as keyvault from '@pulumi/azure-native/keyvault';
 // import * as resources from '@pulumi/azure-native/resources';
 import * as web from '@pulumi/azure-native/web';
 
@@ -129,6 +128,7 @@ try {
   // Storage account is required by Function App.
   // Also, we will upload the function code to the same storage account.
   const storageAccount = new storage.StorageAccount(RESOURCE_NAME, {
+    location: "East US",
     resourceGroupName: RESOURCE_GROUP_NAME,
     sku: {
       name: storage.SkuName.Standard_LRS,

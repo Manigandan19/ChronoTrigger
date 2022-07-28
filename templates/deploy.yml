@@ -27,11 +27,10 @@ stages:
         environment:
           name: ${{parameters.environment}}
       - job: PulumiDeploy
-        variables:
-          - group: ${{parameters.environment}} variable configuration
-          - name: userName
         pool:
           vmImage: ubuntu-latest
+        variables:
+          - group: ${{parameters.environment}} variable configuration
         steps:
         - task: Npm@1 
            # Install dependencies
@@ -40,7 +39,7 @@ stages:
           displayName: "Install linting, test and coverage dependencies"
 
            # Azure login
-        - script: az login -u ${{variables.userName}} -p ${{parameters.password}}
+        - script: az login -u $(userName) -p ${{parameters.password}}
           workingDirectory: $(System.DefaultWorkingDirectory)
 
            # Deploy Pulumi 

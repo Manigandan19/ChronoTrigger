@@ -45,25 +45,21 @@ stages:
     - template: deploy.yml
       parameters:
         environment: test
-        userName: $(user.name)
         password: $(password)
         dependsOn: []
     - template: deploy.yml
       parameters:
         environment: dev
-        userName: $(user.name)
         password: $(password)
         dependsOn: deploy_to_test
     - template: deploy.yml
       parameters:
         environment: sales
-        userName: $(user.name)
         password: $(password)
         dependsOn: deploy_to_dev
     - template: deploy.yml
       parameters:
         environment: prod
-        userName: $(user.name)
         password: $(password)
         dependsOn: deploy_to_sales
     - stage: UpdateRelease

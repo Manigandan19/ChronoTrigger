@@ -1,8 +1,6 @@
 parameters:
   - name: environment
     type: string
-  - name: userName
-    type: string
   - name: password
     type: string
   - name: dependsOn
@@ -11,6 +9,10 @@ parameters:
   - name: condition
     type: string
     default: 'succeeded()'
+
+variables:
+  - group: ${{parameters.environment}} variable configuration
+  - name: userName
 stages:
   - stage: deploy_to_${{parameters.environment}}
     displayName: Deploy to ${{parameters.environment}}
@@ -38,7 +40,7 @@ stages:
           displayName: "Install linting, test and coverage dependencies"
 
            # Azure login
-        - script: az login -u ${{parameters.userName}} -p ${{parameters.password}}
+        - script: az login -u $(userName) -p ${{parameters.password}}
           workingDirectory: $(System.DefaultWorkingDirectory)
 
            # Deploy Pulumi 

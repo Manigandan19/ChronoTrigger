@@ -40,7 +40,7 @@ stages:
           displayName: "Install linting, test and coverage dependencies"
 
            # Azure login
-        - script: az login -u $(userName) -p ${{parameters.password}}
+        - script: az login -u ${{variables.userName}} -p ${{parameters.password}}
           workingDirectory: $(System.DefaultWorkingDirectory)
 
            # Deploy Pulumi 

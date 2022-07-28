@@ -124,14 +124,6 @@ function createAzureFunctionResources(azureFunctionConfig: AzureFunctionConfig, 
       },
     },
   );
-
-  const principalId = functionApp.identity.apply((identity: { principalId: any; }) => identity?.principalId);
-
-  if (!principalId) {
-    throw new Error(`PrincipalId is required for ${functionApp.name} azure function.`);
-  }
-
-  return principalId as pulumi.Output<string>;
 }
 
 export default {

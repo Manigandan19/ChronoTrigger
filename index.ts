@@ -145,6 +145,7 @@ try {
   // Define a Consumption Plan for the Function App.
   // You can change the SKU to Premium or App Service Plan if needed.
   const appServicePlan = new web.AppServicePlan(RESOURCE_NAME, {
+    location: "East US",
     resourceGroupName: RESOURCE_GROUP_NAME,
     sku: {
       name: 'Y1',

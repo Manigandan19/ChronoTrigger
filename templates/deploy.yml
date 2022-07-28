@@ -10,11 +10,6 @@ parameters:
     type: string
     default: 'succeeded()'
 
-variables:
-  - group: ${{parameters.environment}} variable configuration
-  - name: userName
-    value: $[variables.userName]
-
 stages:
   - stage: deploy_to_${{parameters.environment}}
     displayName: Deploy to ${{parameters.environment}}
@@ -32,6 +27,10 @@ stages:
         environment:
           name: ${{parameters.environment}}
       - job: PulumiDeploy
+        variables:
+          - group: ${{parameters.environment}} variable configuration
+          - name: userName
+            value: $[variables.userName]
         pool:
           vmImage: ubuntu-latest
         steps:

@@ -30,7 +30,6 @@ stages:
         variables:
           - group: ${{parameters.environment}} variable configuration
           - name: userName
-            value: $[variables.userName]
         pool:
           vmImage: ubuntu-latest
         steps:

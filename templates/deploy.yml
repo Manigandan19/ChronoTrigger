@@ -1,8 +1,6 @@
 parameters:
   - name: environment
     type: string
-  - name: password
-    type: string
   - name: dependsOn
     type: object
     default: ['deploy_to_test']
@@ -29,18 +27,12 @@ stages:
       - job: PulumiDeploy
         pool:
           vmImage: ubuntu-latest
-        variables:
-          - group: ${{parameters.environment}} variable configuration
         steps:
         - task: Npm@1 
            # Install dependencies
         - script: npm install
           workingDirectory: $(System.DefaultWorkingDirectory)
           displayName: "Install linting, test and coverage dependencies"
-
-           # Azure login
-        - script: az login -u $(userName) -p ${{parameters.password}}
-          workingDirectory: $(System.DefaultWorkingDirectory)
 
            # Deploy Pulumi 
         - script: pulumi stack select ${{parameters.environment}}
@@ -51,3 +43,6 @@ stages:
           workingDirectory: $(System.DefaultWorkingDirectory)
           env:
             PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+            ARM_CLIENT_ID: $(arm.client.id)
+            ARM_CLIENT_SECRET: $(arm.client.secret)
+            ARM_TENANT_ID: $(arm.tenant.id)

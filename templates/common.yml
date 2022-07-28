@@ -45,22 +45,18 @@ stages:
     - template: deploy.yml
       parameters:
         environment: test
-        password: $(password)
         dependsOn: []
     - template: deploy.yml
       parameters:
         environment: dev
-        password: $(password)
         dependsOn: deploy_to_test
     - template: deploy.yml
       parameters:
         environment: sales
-        password: $(password)
         dependsOn: deploy_to_dev
     - template: deploy.yml
       parameters:
         environment: prod
-        password: $(password)
         dependsOn: deploy_to_sales
     - stage: UpdateRelease
       displayName: Update the release to be final in GitHub

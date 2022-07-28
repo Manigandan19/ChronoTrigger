@@ -60,7 +60,7 @@ function createAzureFunctionResources(azureFunctionConfig: AzureFunctionConfig, 
   storageAccount,
   appServicePlan,
   environmentConfig,
-} : AzureConfig) : pulumi.Output<string> {
+} : AzureConfig) {
   const {
     functionAppName,
     blobName,

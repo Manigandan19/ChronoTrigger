@@ -49,7 +49,6 @@ stages:
       parameters:
         environment: dev
         dependsOn: deploy_to_test
-    - template: deploy.yml
     - stage: UpdateRelease
       displayName: Update the release to be final in GitHub
       dependsOn: deploy_to_prod

@@ -1,4 +1,3 @@
 name: ChronoTrigger
 runtime: nodejs
 description: Used to create Azure resources like (Resource group, storage account, key vault, functions) and deploy the same through code.
-azure-native:location: WestUS

@@ -32,16 +32,23 @@ stages:
            # Install dependencies
         - script: npm install
           workingDirectory: $(System.DefaultWorkingDirectory)
-          displayName: "Install linting, test and coverage dependencies"
+          displayName: "Install package dependencies"
 
-           # Deploy Pulumi 
-        - script:  pulumi stack select dev --create
+           # Select or Create Stack in Pulumi 
+        - script:  pulumi stack select ${{parameters.environment}} --create
+          displayName: "Select pulumi stack"
           env:
            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+
+           # Configure azure location in pulumi
         - script: pulumi config set azure-native:location $(arm.location)
+          displayName: "Config pulumi location"
           env:
            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+        
+           # Pulumi up
         - script: npm run pulumi-preview:${{parameters.environment}}
+          displayName: "Deploy Pulumi"
           env:
             PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
             ARM_CLIENT_ID: $(arm.client.id)

@@ -24,16 +24,16 @@ stages:
               echo "##vso[task.setvariable variable=chrono.tag;isOutput=true]${tag}"
             displayName: Get the version from package.json
             name: GetPackageVersion
-          - task: Npm@1 
+
            # Install dependencies
-            
+          - task: Npm@1 
           - script: npm install
             workingDirectory: ${{parameters.authorizationfilePath}}
-            displayName: "Install Authorization packages"
+            displayName: "Install Authorization package dependencies"
 
           - script: npm install
             workingDirectory: ${{parameters.documentationfilePath}}
-            displayName: "Install DocumentUpload packages"
+            displayName: "Install DocumentUpload package dependencies"
 
            # Execute unit tests
           - script: npm run test

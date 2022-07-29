@@ -51,7 +51,7 @@ stages:
         dependsOn: deploy_to_test
     - stage: UpdateRelease
       displayName: Update the release to be final in GitHub
-      dependsOn: deploy_to_prod
+      dependsOn: deploy_to_dev
       jobs:
         - job: UpdateRelease
           steps:

@@ -38,7 +38,6 @@ stages:
            # Execute unit tests
           - script: npm run test
             displayName: "Execute unit tests"
-            continueOnError: true 
   # This section does the actual deployments.  It will only fire if the build was triggered manually, or
   # if the build was triggered by an accepted PR (aka a commit to the main branch).
   - ${{ if or(eq(variables['Build.Reason'], 'IndividualCI'), eq(variables['Build.Reason'], 'Manual')) }}:

@@ -45,13 +45,9 @@ stages:
       parameters:
         environment: test
         dependsOn: []
-    - template: deploy.yml
-      parameters:
-        environment: dev
-        dependsOn: deploy_to_test
     - stage: UpdateRelease
       displayName: Update the release to be final in GitHub
-      dependsOn: deploy_to_dev
+      dependsOn: deploy_to_test
       jobs:
         - job: UpdateRelease
           steps:

@@ -56,9 +56,4 @@ export const azureFunctionConfigs: Array<AzureFunctionConfig> = [
     blobName: 'authorizationtriggerzip',
     projectDirectoryPath: './AuthorizationChronoTrigger',
   },
-  {
-    functionAppName: 'documenttest',
-    blobName: 'documentuploadtriggerzip',
-    projectDirectoryPath: './DocumentUploadChronoTrigger',
-  },
 ];

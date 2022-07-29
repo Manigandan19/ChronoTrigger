@@ -111,6 +111,7 @@ function createAzureFunctionResources(azureFunctionConfig: AzureFunctionConfig, 
   const functionApp = new web.WebApp(
     `${resourceNamePrefix}${functionAppName}${environment}`,
     {
+      location: "East US",
       resourceGroupName,
       serverFarmId: appServicePlan.id, // consumption plan
       kind: 'functionapp',

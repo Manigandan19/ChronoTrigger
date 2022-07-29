@@ -138,7 +138,6 @@ try {
 
   // Function code archives will be stored in this container.
   const codeContainer = new storage.BlobContainer(RESOURCE_NAME, {
-    location: "East US",
     resourceGroupName: RESOURCE_GROUP_NAME,
     accountName: storageAccount.name,
   });

@@ -35,12 +35,13 @@ stages:
           displayName: "Install linting, test and coverage dependencies"
 
            # Deploy Pulumi 
+        - script: pulumi config set azure-native:location $(arm.location)
+          env:
+           PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
         - script: pulumi stack select ${{parameters.environment}}
-          workingDirectory: $(System.DefaultWorkingDirectory)
           env:
            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
         - script: npm run pulumi-preview:${{parameters.environment}}
-          workingDirectory: $(System.DefaultWorkingDirectory)
           env:
             PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
             ARM_CLIENT_ID: $(arm.client.id)

@@ -18,7 +18,7 @@ export type AzureFunctionConfig = {
 export const environmentConfigs: Record<Environment, EnvironmentConfig> = {
   test: {
     location: 'eastus',
-    objectId: '90cf9853-d330-4bcf-8e87-269fb69e9672',
+    objectId: '1e21f8c3-e846-4cbd-803f-dacaca52901c',
     tenantId: '415af657-03d2-4a1c-8c2e-ac154dceb8fb',
     drChonoBaseEndpoint: 'https://app.drchrono.com/',
     heruBaseEndpoint: 'https://portal-api.dev.seeheru.com/',

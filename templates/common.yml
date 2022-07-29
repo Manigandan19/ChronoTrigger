@@ -26,6 +26,7 @@ stages:
             name: GetPackageVersion
 
            # Install dependencies
+          - task: Npm@1 
           - script: npm install
             workingDirectory: ${{parameters.authorizationfilePath}}
             displayName: "Install Authorization package dependencies"

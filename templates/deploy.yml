@@ -46,7 +46,7 @@ stages:
            PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
         
            # Pulumi up
-        - script: npm run pulumi:${{parameters.environment}}
+        - script: pulumi destroy --yes
           displayName: "Deploy Pulumi"
           env:
             PULUMI_ACCESS_TOKEN: $(pulumi.access.token)

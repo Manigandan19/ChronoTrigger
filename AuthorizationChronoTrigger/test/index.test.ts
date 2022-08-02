@@ -31,7 +31,7 @@ describe('Test for Demo Function', () => {
       body: { name: 'John' },
     };
     const resultString =
-      'Hello, John. This HTTP triggered function executed successfully.';
+      'Hello, John. This authorization HTTP triggered function executed successfully.';
 
     // Action
     await httpTrigger(context, request);

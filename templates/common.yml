@@ -27,11 +27,11 @@ stages:
 
            # Install dependencies
           - task: Npm@1 
-          - script: npm install
+          - script: npm install && npm run build
             workingDirectory: ${{parameters.authorizationfilePath}}
             displayName: "Install Authorization package dependencies"
 
-          - script: npm install
+          - script: npm install && npm run build
             workingDirectory: ${{parameters.documentationfilePath}}
             displayName: "Install DocumentUpload package dependencies"
 
